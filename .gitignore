@@ -1,0 +1,11 @@
+# Data files - not included in repository
+*.csv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db
