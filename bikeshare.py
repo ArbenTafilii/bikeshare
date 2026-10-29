@@ -2,6 +2,7 @@ import time
 import pandas as pd
 import numpy as np
 
+# Maps city names to their respective CSV file paths
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
@@ -9,6 +10,13 @@ CITY_DATA = { 'chicago': 'chicago.csv',
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
+
+    Prompts the user for three inputs:
+      - city: one of chicago, new york city, or washington
+      - month: one of january through june, or 'all' for no filter
+      - day: a day of the week (e.g. monday), or 'all' for no filter
+
+    All inputs are case-insensitive and validated in a loop until valid.
 
     Returns:
         (str) city - name of the city to analyze
@@ -49,10 +57,15 @@ def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
 
+    Reads the CSV file for the given city, converts the 'Start Time' column to
+    datetime, and extracts month, day of week, and hour as new columns. Then
+    filters the DataFrame based on the provided month and day values.
+
     Args:
         (str) city - name of the city to analyze
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
+
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
@@ -78,8 +91,20 @@ def load_data(city, month, day):
 
 
 def time_stats(df):
-    """Displays statistics on the most frequent times of travel."""
+    """
+    Displays statistics on the most frequent times of travel.
 
+    Computes and prints:
+      - The most common month (among filtered data)
+      - The most common day of the week
+      - The most common start hour
+
+    Args:
+        df - Pandas DataFrame containing bikeshare data
+
+    Returns:
+        None
+    """
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
@@ -101,8 +126,20 @@ def time_stats(df):
 
 
 def station_stats(df):
-    """Displays statistics on the most popular stations and trip."""
+    """
+    Displays statistics on the most popular stations and trip.
 
+    Computes and prints:
+      - Most commonly used start station
+      - Most commonly used end station
+      - Most frequent combination of start and end station
+
+    Args:
+        df - Pandas DataFrame containing bikeshare data
+
+    Returns:
+        None
+    """
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
@@ -124,8 +161,18 @@ def station_stats(df):
 
 
 def trip_duration_stats(df):
-    """Displays statistics on the total and average trip duration."""
+    """
+    Displays statistics on the total and average trip duration.
 
+    Computes total travel time and mean travel time from the
+    'Trip Duration' column (values are in seconds).
+
+    Args:
+        df - Pandas DataFrame containing bikeshare data
+
+    Returns:
+        None
+    """
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
@@ -146,8 +193,20 @@ def trip_duration_stats(df):
 
 
 def user_stats(df):
-    """Displays statistics on bikeshare users."""
+    """
+    Displays statistics on bikeshare users.
 
+    Computes and prints:
+      - Counts of each user type (Subscriber, Customer, etc.)
+      - Counts by gender (only available for Chicago and New York City)
+      - Earliest, most recent, and most common birth year (not available for Washington)
+
+    Args:
+        df - Pandas DataFrame containing bikeshare data
+
+    Returns:
+        None
+    """
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
@@ -178,8 +237,18 @@ def user_stats(df):
 
 
 def display_raw_data(df):
-    """Displays 5 rows of raw data at a time upon user request."""
+    """
+    Displays 5 rows of raw data at a time upon user request.
 
+    Prompts the user repeatedly asking if they want to see 5 more rows.
+    Continues until the user answers 'no' or there is no more data.
+
+    Args:
+        df - Pandas DataFrame containing bikeshare data
+
+    Returns:
+        None
+    """
     i = 0
     while i < len(df):
         show = input('\nWould you like to see 5 lines of raw data? Enter yes or no.\n').lower().strip()
