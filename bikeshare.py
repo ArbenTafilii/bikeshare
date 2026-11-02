@@ -6,6 +6,10 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
+MONTHS = ['january', 'february', 'march', 'april', 'may', 'june']
+MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June']
+DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
 def get_valid_input(prompt, valid_options):
     """Prompts user until a valid option is entered. Returns the lowercased input."""
     while True:
@@ -33,12 +37,12 @@ def get_filters():
 
     month = get_valid_input(
         '\nWhich month? all, January, February, March, April, May, or June?\n',
-        ['all', 'january', 'february', 'march', 'april', 'may', 'june']
+        ['all'] + MONTHS
     )
 
     day = get_valid_input(
         '\nWhich day? all, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday?\n',
-        ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+        ['all'] + DAYS
     )
 
     print('-'*40)
@@ -64,8 +68,7 @@ def load_data(city, month, day):
     df['hour'] = df['Start Time'].dt.hour
 
     if month != 'all':
-        month_list = ['january', 'february', 'march', 'april', 'may', 'june']
-        df = df[df['month'] == month_list.index(month) + 1]
+        df = df[df['month'] == MONTHS.index(month) + 1]
 
     if day != 'all':
         df = df[df['day_of_week'] == day.title()]
@@ -79,8 +82,7 @@ def time_stats(df):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    month_names = ['January', 'February', 'March', 'April', 'May', 'June']
-    print('Most Common Month:', month_names[df['month'].mode()[0] - 1])
+    print('Most Common Month:', MONTH_NAMES[df['month'].mode()[0] - 1])
     print('Most Common Day of Week:', df['day_of_week'].mode()[0])
     print('Most Common Start Hour:', df['hour'].mode()[0])
 
