@@ -202,6 +202,10 @@ def user_stats(df):
       - Counts by gender (only available for Chicago and New York City)
       - Earliest, most recent, and most common birth year (not available for Washington)
 
+    Note: The Gender and Birth Year columns may contain NaN values for some rows.
+    value_counts() excludes NaN automatically, and min/max/mode ignore NaN by default,
+    so no explicit dropna() call is needed here.
+
     Args:
         df - Pandas DataFrame containing bikeshare data
 
