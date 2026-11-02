@@ -43,3 +43,24 @@ The data covers the first six months of 2017 for three cities:
 - Python 3
 - pandas
 - numpy
+
+## Sample Output
+
+```
+Hello! Let's explore some US bikeshare data!
+
+Would you like to see data for Chicago, New York City, or Washington?
+chicago
+
+Which month? all, January, February, March, April, May, or June?
+march
+
+Which day? all, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday?
+all
+
+Calculating The Most Frequent Times of Travel...
+
+Most Common Month: March
+Most Common Day of Week: Tuesday
+Most Common Start Hour: 17
+```
